@@ -1,7 +1,16 @@
 <div class="content">
   <p><%= product.name %></p>
   <p><%= product.price %>円</p>
-  <% product.images.each do |image| %>
-    <%= image_tag image.src.url %>
-  <% end %><br>
+    <% product.images.each do |image| %>
+      <%= image_tag image.src.url %>
+    <% end %><br>
+    
+  <%= link_to '編集', edit_product_path(product) %>
+  <%= link_to '削除', product_path(product), method: :delete %>
+
+  <p>取引状況：<%= product.status_i18n %></p>
+  <p>配送料負担</p>
+    <%= f.collection_select :delivery_fee_id, DeliveryFee.all, :id, :name %>
+  <p>配送方法</p>
+    <%= f.collection_select :delivery_way_id, DeliveryWay.all, :id, :name %>
 </div>
